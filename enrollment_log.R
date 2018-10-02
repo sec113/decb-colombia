@@ -1,15 +1,33 @@
+# Title   : Screening and Enrollment log generator
+# Author  : Sergio Castro
+# Created : 09/2018
+# Comment : input:  (1) TSV document from the interactive kiosk
+#           output: (1) Data table with Screening and Enrollment Log
+
+# List of packages for session
+options( java.parameters = "-Xmx6g" )
+.packages = c('plyr','dplyr','data.table')
+# Install CRAN packages (if not already installed)
+.inst = .packages %in% installed.packages()
+if(length(.packages[!.inst]) > 0) install.packages(.packages[!.inst])
+# Load packages into session 
+invisible(lapply(.packages, library, character.only=TRUE))
+
 library(plyr)
 # Screening
+# Load and prepare database
+database=read.delim("D:/Informacion/Documents/Dartmouth/Data/Resultados_Diada_19-09-2018.xls")
+database=within(database, rm(X))
+database=as.data.frame(database) #Confirm if this step is necessary
 
-database=read.delim("C:/Users/SergioMC/Documents/Dartmouth/Research/screeningresults11.txt")
+# Set columns names
+setnames(database, c("id", "cedula",    "date",    "screen_dep",    "phq9",    "audit",    "age",    "sex",    "oh",    "depression"))
 
-as.data.frame(unique(database$cedula))
-as.data.frame(table(database$cedula,database$sex))
+# Set date
+database$date=as.Date.factor(database$date,"%Y-%m-%d")
+database=subset(database, date < as.Date("2018-09-01")) ##año-mes-dia
 
-database$date=as.Date(database$date,"%d/%m/%Y")
-
-database=subset(database, date < as.Date("2018-06-06")) ##año-mes-dia
-
+# Get gender description
 sexdf=database[order(database$cedula),]
 sexdf=sexdf[!duplicated(sexdf$cedula),]
 table(sexdf$sex)
@@ -29,8 +47,6 @@ enrolment=data.frame(total=nrow(count(database,"cedula")),
 
 write.csv(x = enrolment,file = "C:/Users/SergioMC/Documents/Dartmouth/Research/enrollment.csv")
 
-database$notdiagnosis=ifelse(database$depression != "" | database$oh != "","no","yes")
-database$notscreen=ifelese()
 
 # database$dualdiagnosis=ifelse(database$depression != "" & database$oh != "","yes","no")
 # database$poh = ifelse(database$audit > 6, "yes", "no")
