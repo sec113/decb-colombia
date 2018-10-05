@@ -1,0 +1,607 @@
+---
+title: "Reporte IMICO - Providers"
+author: "Sergio Castro"
+date: "17 de julio de 2018"
+output:
+  html_document:
+    df_print: paged
+  word_document: default
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(error = TRUE)
+library(Hmisc)
+library(knitr)
+
+library(dplyr)
+library(qwraps2)
+
+  
+database=read.csv('C:/Users/SergioMC/Downloads/IMICO_DATA_providers.csv', encoding = "UTF-8")
+
+
+#Setting Units
+
+
+#Setting Factors(will create new variable for factors)
+database$pimicop4 = factor(database$pimicop4,levels=c("1","2","3","4","5","6"))
+database$pimicop5 = factor(database$pimicop5,levels=c("1","2","3","4","5","6"))
+database$pimicop6 = factor(database$pimicop6,levels=c("1","2","3","4","5","6"))
+database$pimicop7 = factor(database$pimicop7,levels=c("1","2","3","4","5","6"))
+database$pimicop8 = factor(database$pimicop8,levels=c("1","2","3","4","5","6"))
+database$pimicop9 = factor(database$pimicop9,levels=c("1","2","3","4","5","6"))
+database$pimicop10 = factor(database$pimicop10,levels=c("1","2","3","4","5","6"))
+database$pimicop11 = factor(database$pimicop11,levels=c("1","2","3","4","5","6"))
+database$pimicop14 = factor(database$pimicop14,levels=c("1","2","3","4","5","6"))
+database$pimicop15 = factor(database$pimicop15,levels=c("1","2","3","4","5","6"))
+database$pimicop16 = factor(database$pimicop16,levels=c("1","2","3","4","5","6"))
+database$pimicop17 = factor(database$pimicop17,levels=c("1","2","3","4","5","6"))
+database$pimicop18 = factor(database$pimicop18,levels=c("1","2","3","4","5","6"))
+database$pimicop19 = factor(database$pimicop19,levels=c("1","2","3","4","5","6"))
+database$pimicop20 = factor(database$pimicop20,levels=c("1","2","3","4","5","6"))
+database$pimicop21 = factor(database$pimicop21,levels=c("1","2","3","4","5","6"))
+database$pimicop22 = factor(database$pimicop22,levels=c("1","2","3","4","5","6"))
+database$pimicop23 = factor(database$pimicop23,levels=c("1","2","3","4","5","6"))
+database$pimicop24 = factor(database$pimicop24,levels=c("1","2","3","4","5","6"))
+database$pimicop25 = factor(database$pimicop25,levels=c("1","2","3","4","5","6"))
+database$pimicop26 = factor(database$pimicop26,levels=c("1","2","3","4","5","6"))
+database$pimicop27 = factor(database$pimicop27,levels=c("1","2","3","4","5","6"))
+database$pimicop28 = factor(database$pimicop28,levels=c("1","2","3","4","5","6"))
+database$pimicop29 = factor(database$pimicop29,levels=c("1","2","3","4","5","6"))
+database$pimicop30 = factor(database$pimicop30,levels=c("1","2","3","4","5","6"))
+database$pimicop31 = factor(database$pimicop31,levels=c("1","2","3","4","5","6"))
+database$pimicop32 = factor(database$pimicop32,levels=c("1","2","3","4","5","6"))
+database$pimicop33 = factor(database$pimicop33,levels=c("1","2","3","4","5","6"))
+database$pimicop34 = factor(database$pimicop34,levels=c("1","2","3","4","5","6"))
+database$pimicop35 = factor(database$pimicop35,levels=c("1","2","3","4","5","6"))
+database$pimicop36 = factor(database$pimicop36,levels=c("1","2","3","4","5","6"))
+database$pimicop37 = factor(database$pimicop37,levels=c("1","2","3","4","5","6"))
+database$pimicop38 = factor(database$pimicop38,levels=c("1","2","3","4","5","6"))
+database$pimicop39 = factor(database$pimicop39,levels=c("1","2","3","4","5","6"))
+database$pimicop40 = factor(database$pimicop40,levels=c("1","2","3","4","5","6"))
+database$pimicop41 = factor(database$pimicop41,levels=c("1","2","3","4","5","6"))
+database$pimicop42 = factor(database$pimicop42,levels=c("1","2","3","4","5","6"))
+database$pimicop43 = factor(database$pimicop43,levels=c("1","2","3","4","5","6"))
+database$pimicop44 = factor(database$pimicop44,levels=c("1","2","3","4","5","6"))
+database$pimicop45 = factor(database$pimicop45,levels=c("1","2","3","4","5","6"))
+database$pimicop46 = factor(database$pimicop46,levels=c("1","2","3","4","5","6"))
+database$pimicop47 = factor(database$pimicop47,levels=c("1","2","3","4","5","6"))
+database$pimicop48 = factor(database$pimicop48,levels=c("1","2","3","4","5","6"))
+database$pimicop49 = factor(database$pimicop49,levels=c("1","2","3","4","5","6"))
+database$pimicop50 = factor(database$pimicop50,levels=c("1","2","3","4","5","6"))
+database$pimicop51 = factor(database$pimicop51,levels=c("1","2","3","4","5","6"))
+database$pimicop52 = factor(database$pimicop52,levels=c("1","2","3","4","5","6"))
+database$pimicop53 = factor(database$pimicop53,levels=c("1","2","3","4","5","6"))
+database$pimicop54 = factor(database$pimicop54,levels=c("1","2","3","4","5","6"))
+database$pimicop55 = factor(database$pimicop55,levels=c("1","2","3","4","5","6"))
+database$pimicop56 = factor(database$pimicop56,levels=c("1","2","3","4","5","6"))
+database$pimicop57 = factor(database$pimicop57,levels=c("1","2","3","4","5","6"))
+database$pimicop62 = factor(database$pimicop62,levels=c("1","2","3","4","5","6"))
+database$pimicop63 = factor(database$pimicop63,levels=c("1","2","3","4","5","6"))
+database$pimicop64 = factor(database$pimicop64,levels=c("1","2","3","4","5","6"))
+database$pimicop65 = factor(database$pimicop65,levels=c("1","2","3","4","5","6"))
+database$pimicop67 = factor(database$pimicop67,levels=c("1","2","3","4","5","6"))
+database$pimicop69 = factor(database$pimicop69,levels=c("1","2","3","4","5","6"))
+database$pimicop71 = factor(database$pimicop71,levels=c("1","2","3","4","5","6"))
+database$pimicop73 = factor(database$pimicop73,levels=c("1","2","3","4","5","6"))
+database$pimicop77 = factor(database$pimicop77,levels=c("1","2","3","4","5","6"))
+database$pimicop78 = factor(database$pimicop78,levels=c("1","2","3","4","5","6"))
+database$pimicop79 = factor(database$pimicop79,levels=c("1","2","3","4","5","6"))
+database$pimicop80 = factor(database$pimicop80,levels=c("1","2","3","4","5","6"))
+database$pimicop81 = factor(database$pimicop81,levels=c("1","2","3","4","5","6"))
+database$pimicop82 = factor(database$pimicop82,levels=c("1","2","3","4","5","6"))
+database$pimicop83 = factor(database$pimicop83,levels=c("1","2","3","4","5","6"))
+database$pimicop84 = factor(database$pimicop84,levels=c("1","2","3","4","5","6"))
+database$pimicop85 = factor(database$pimicop85,levels=c("1","2","3","4","5","6"))
+database$pimicop86 = factor(database$pimicop86,levels=c("1","2","3","4","5","6"))
+database$pimicop87 = factor(database$pimicop87,levels=c("1","2","3","4","5","6"))
+database$pimicop88 = factor(database$pimicop88,levels=c("1","2","3","4","5","6"))
+database$pimicop89 = factor(database$pimicop89,levels=c("1","2","3","4","5","6"))
+database$pimicop90 = factor(database$pimicop90,levels=c("1","2","3","4","5","6"))
+database$pimicop91 = factor(database$pimicop91,levels=c("1","2","3","4","5","6"))
+database$pimicop92 = factor(database$pimicop92,levels=c("1","2","3","4","5","6"))
+database$pimicop93 = factor(database$pimicop93,levels=c("1","2","3","4","5","6"))
+database$pimicop94 = factor(database$pimicop94,levels=c("1","2","3","4","5","6"))
+database$pimicop95 = factor(database$pimicop95,levels=c("1","2","3","4","5","6"))
+database$pimicop96 = factor(database$pimicop96,levels=c("1","2","3","4","5","6"))
+database$pimicop97 = factor(database$pimicop97,levels=c("1","2","3","4","5","6"))
+database$pimicop98 = factor(database$pimicop98,levels=c("1","2","3","4","5","6"))
+database$pimicop99 = factor(database$pimicop99,levels=c("1","2","3","4","5","6"))
+database$pimicop100 = factor(database$pimicop100,levels=c("1","2","3","4","5","6"))
+database$pimicop101 = factor(database$pimicop101,levels=c("1","2","3","4","5","6"))
+database$pimicop102 = factor(database$pimicop102,levels=c("1","2","3","4","5","6"))
+database$pimicop103 = factor(database$pimicop103,levels=c("1","2","3","4","5","6"))
+database$pimicop107 = factor(database$pimicop107,levels=c("1","2","3","4","5","6"))
+database$pimicop108 = factor(database$pimicop108,levels=c("1","2","3","4","5","6"))
+database$pimicop109 = factor(database$pimicop109,levels=c("1","2","3","4","5","6"))
+database$pimicop110 = factor(database$pimicop110,levels=c("1","2","3","4","5","6"))
+database$pimicop111 = factor(database$pimicop111,levels=c("1","2","3","4","5","6"))
+database$pimicop112 = factor(database$pimicop112,levels=c("1","2","3","4","5","6"))
+database$pimicop113 = factor(database$pimicop113,levels=c("1","2","3","4","5","6"))
+database$pimicop114 = factor(database$pimicop114,levels=c("1","2","3","4","5","6"))
+database$pimicop115 = factor(database$pimicop115,levels=c("1","2","3","4","5","6"))
+database$pimicop116 = factor(database$pimicop116,levels=c("1","2","3","4","5","6"))
+database$pimicop117 = factor(database$pimicop117,levels=c("1","2","3","4","5","6"))
+database$pimicop118 = factor(database$pimicop118,levels=c("1","2","3","4","5","6"))
+database$imico_provider_pre_complete = factor(database$imico_provider_pre_complete,levels=c("0","1","2"))
+database$ppsat1 = factor(database$ppsat1,levels=c("1","2","3","4","5","6"))
+database$ppsat2 = factor(database$ppsat2,levels=c("1","2","3","4","5","6"))
+database$ppsat3 = factor(database$ppsat3,levels=c("1","2","3","4","5","6"))
+database$ppsat4 = factor(database$ppsat4,levels=c("1","2","3","4","5","6"))
+database$ppsat5 = factor(database$ppsat5,levels=c("1","2","3","4","5","6"))
+database$ppsat6 = factor(database$ppsat6,levels=c("1","2","3","4","5","6"))
+database$ppsat7 = factor(database$ppsat7,levels=c("1","2","3","4","5","6"))
+database$ppsat8 = factor(database$ppsat8,levels=c("1","2","3","4","5","6"))
+database$ppsat9 = factor(database$ppsat9,levels=c("1","2","3","4","5","6"))
+database$ppsat10 = factor(database$ppsat10,levels=c("1","2","3","4","5","6"))
+database$ppsat11 = factor(database$ppsat11,levels=c("1","2","3","4","5","6"))
+database$ppsat12 = factor(database$ppsat12,levels=c("1","2","3","4","5","6"))
+database$ppsat13 = factor(database$ppsat13,levels=c("1","2","3","4","5","6"))
+database$ppsat14 = factor(database$ppsat14,levels=c("1","2","3","4","5","6"))
+database$ppsat15 = factor(database$ppsat15,levels=c("1","2","3","4","5","6"))
+database$ppsat16 = factor(database$ppsat16,levels=c("1","2","3","4","5","6"))
+database$ppsat17 = factor(database$ppsat17,levels=c("1","2","3","4","5","6"))
+database$ppsat18 = factor(database$ppsat18,levels=c("1","2","3","4","5","6"))
+database$ppsat19 = factor(database$ppsat19,levels=c("1","2","3","4","5","6"))
+database$ppsat20 = factor(database$ppsat20,levels=c("1","2","3","4","5","6"))
+database$ppsat21 = factor(database$ppsat21,levels=c("1","2","3","4","5","6"))
+database$ppsat22 = factor(database$ppsat22,levels=c("1","2","3","4","5","6"))
+database$ppsat23 = factor(database$ppsat23,levels=c("1","2","3","4","5","6"))
+database$ppsat24 = factor(database$ppsat24,levels=c("1","2","3","4","5","6"))
+database$ppsat25 = factor(database$ppsat25,levels=c("1","2","3","4","5","6"))
+database$ppsat26 = factor(database$ppsat26,levels=c("1","2","3","4","5","6"))
+database$ppsat27 = factor(database$ppsat27,levels=c("1","2","3","4","5","6"))
+database$ppsat28 = factor(database$ppsat28,levels=c("1","2","3","4","5","6"))
+database$ppsat29 = factor(database$ppsat29,levels=c("1","2","3","4","5","6"))
+database$ppsat30 = factor(database$ppsat30,levels=c("1","2","3","4","5","6"))
+database$ppsat31 = factor(database$ppsat31,levels=c("1","2","3","4","5","6"))
+database$ppsat32 = factor(database$ppsat32,levels=c("1","2","3","4","5","6"))
+database$ppsat33 = factor(database$ppsat33,levels=c("1","2","3","4","5","6"))
+database$ppsat34 = factor(database$ppsat34,levels=c("1","2","3","4","5","6"))
+database$ppsat35 = factor(database$ppsat35,levels=c("1","2","3","4","5","6"))
+database$ppsat36 = factor(database$ppsat36,levels=c("1","2","3","4","5","6"))
+database$ppsat37 = factor(database$ppsat37,levels=c("1","2","3","4","5","6"))
+database$ppsat38 = factor(database$ppsat38,levels=c("1","2","3","4","5","6"))
+database$ppsat39 = factor(database$ppsat39,levels=c("1","2","3","4","5","6"))
+database$ppsat40 = factor(database$ppsat40,levels=c("1","2","3","4","5","6"))
+database$ppsat41 = factor(database$ppsat41,levels=c("1","2","3","4","5","6"))
+database$ppsat42 = factor(database$ppsat42,levels=c("1","2","3","4","5","6"))
+database$ppsat43 = factor(database$ppsat43,levels=c("1","2","3","4","5","6"))
+database$ppsat44 = factor(database$ppsat44,levels=c("1","2","3","4","5","6"))
+database$ppsat45 = factor(database$ppsat45,levels=c("1","2","3","4","5","6"))
+database$ppsat46 = factor(database$ppsat46,levels=c("1","2","3","4","5","6"))
+database$ppsat47 = factor(database$ppsat47,levels=c("1","2","3","4","5","6"))
+database$ppsat48 = factor(database$ppsat48,levels=c("1","2","3","4","5","6"))
+database$ppsat49 = factor(database$ppsat49,levels=c("1","2","3","4","5","6"))
+database$ppsat50 = factor(database$ppsat50,levels=c("1","2","3","4","5","6"))
+database$ppsat51 = factor(database$ppsat51,levels=c("1","2","3","4","5","6"))
+database$ppsat52 = factor(database$ppsat52,levels=c("1","2","3","4","5","6"))
+database$ppsat53 = factor(database$ppsat53,levels=c("1","2","3","4","5","6"))
+database$ppsat54 = factor(database$ppsat54,levels=c("1","2","3","4","5","6"))
+database$ppsat55 = factor(database$ppsat55,levels=c("1","2","3","4","5","6"))
+database$ppsat56 = factor(database$ppsat56,levels=c("1","2","3","4","5","6"))
+database$ppsat57 = factor(database$ppsat57,levels=c("1","2","3","4","5","6"))
+database$psat_provider_pre_complete = factor(database$psat_provider_pre_complete,levels=c("0","1","2"))
+database$sex_staff = factor(database$sex_staff,levels=c("1","2","3"))
+database$race_staff = factor(database$race_staff,levels=c("1","2","3","4","5","6","7","8","9"))
+database$ethicity_staff = factor(database$ethicity_staff,levels=c("1","2","3"))
+database$education_staff = factor(database$education_staff,levels=c("1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28"))
+database$datos_sociodemogrficos_staff_complete = factor(database$datos_sociodemogrficos_staff_complete,levels=c("0","1","2"))
+
+levels(database$pimicop4)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop5)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop6)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop7)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop8)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop9)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop10)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop11)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop14)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop15)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop16)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop17)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop18)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop19)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop20)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop21)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop22)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop23)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop24)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop25)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop26)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop27)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop28)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop29)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop30)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop31)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop32)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop33)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop34)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop35)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop36)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop37)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop38)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop39)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop40)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop41)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop42)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop43)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop44)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop45)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop46)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop47)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop48)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop49)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop50)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop51)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop52)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop53)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop54)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop55)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop56)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop57)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop62)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop63)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop64)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop65)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop67)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop69)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop71)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop73)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop77)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop78)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop79)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop80)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop81)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop82)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop83)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop84)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop85)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop86)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop87)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop88)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop89)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop90)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop91)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop92)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop93)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop94)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop95)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop96)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop97)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop98)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop99)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop100)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop101)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop102)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop103)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop107)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop108)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop109)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop110)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop111)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop112)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop113)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop114)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop115)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop116)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop117)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$pimicop118)=c("De ningún modo","Un poco","Una cantidad moderada","Mucho","No lo sé","Prefiero no responder")
+levels(database$imico_provider_pre_complete)=c("Incomplete","Unverified","Complete")
+levels(database$ppsat1)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat2)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat3)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat4)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat5)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat6)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat7)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat8)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat9)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat10)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat11)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat12)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat13)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat14)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat15)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat16)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat17)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat18)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat19)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat20)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat21)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat22)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat23)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat24)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat25)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat26)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat27)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat28)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat29)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat30)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat31)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat32)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat33)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat34)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat35)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat36)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat37)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat38)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat39)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat40)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat41)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat42)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat43)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat44)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat45)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat46)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat47)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat48)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat49)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat50)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat51)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat52)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat53)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat54)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat55)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat56)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$ppsat57)=c("En absoluto","Un poco","Una cantidad moderada","Mucho","No aplicable","Prefiero no responder")
+levels(database$psat_provider_pre_complete)=c("Incomplete","Unverified","Complete")
+levels(database$sex_staff)=c("Masculino","Femenino","Prefiero no responder")
+levels(database$race_staff)=c("Indigena","Palenquero","Raizal","Negro (Afro-colombiano)","Gitano (Rom)","Mestizo","Blanco","Ninguno de los anteriores","Prefiero no responder")
+levels(database$ethicity_staff)=c("Hispano (a)/Latino(a)","No Hispano (a)/ No Latino (a)","Prefiero no responder")
+levels(database$education_staff)=c("Ninguna","Preescolar","Kindegarten","1er grado","2do grado","3er grado","4to grado","5to grado","6to grado","7mo grado","8vo grado","9no grado","10mo grado","11er grado","Bachillerato","GED","Algunos créditos universitarios, pero menos de 1 año","Diplomado","Licenciatura","Maestría","Título profesional","Doctorado","Un año o más de universidad en un programa de 2 años, sin grado","Un año de universidad en un programa de 4 años, sin grado","Dos años de universidad en un programa de 4 años, sin grado","Tres años o más de universidad en un programa de 4 años, sin grado","Desconocido","Prefiero no responder")
+levels(database$datos_sociodemogrficos_staff_complete)=c("Incomplete","Unverified","Complete")
+
+label(database$record_id)="Record ID"
+label(database$pimicop1)="Número de identificación del entrevistado "
+label(database$pimicop2)="La fecha de hoy "
+label(database$pimicop4)="Tendría discusiones con otros prestadores y personal acerca de lo que se necesita para continuar proporcionando el PROGRAMA en el futuro"
+label(database$pimicop5)="¿Discutiría con otras personas (por ejemplo, familiares, amigos, compañeros de trabajo, o cualquiera otra gente) lo que el programa es en términos generales?"
+label(database$pimicop6)="¿Discutiría con otras personas (por ejemplo, familiares, amigos, compañeros de trabajo, o cualquiera otra persona) el impacto del Programa en los clientes?"
+label(database$pimicop7)="¿Discutiría con otras personas (por ejemplo, familiares, amigos, compañeros de trabajo o cualquier otra persona) sus experiencias como prestador del PROGRAMA?"
+label(database$pimicop8)="¿Animaría a otras personas fuera de su organización a convertirse en un prestador del PROGRAMA?"
+label(database$pimicop9)="¿Seguiría prestando EL PROGRAMA en el futuro?"
+label(database$pimicop10)="¿Buscaría usted supervisión regular para EL PROGRAMA en el futuro?"
+label(database$pimicop11)="¿Seguiría monitorizando el progreso de los clientes utilizando instrumentos   apropiados (es decir, evaluaciones, formularios de monitoreo semanal)?"
+label(database$pimicop12)="¿Prestar el PROGRAMA será una alta prioridad para usted en el futuro?"
+label(database$pimicop13)="Si el encuestado responde De ningún modo o Un poco pregunte: ¿Por qué no sería una alta prioridad?"
+label(database$pimicop14)="¿Le gustaría prestar el PROGRAMA?"
+label(database$pimicop15)="¿Se sentiría bien al prestar EL PROGRAMA?"
+label(database$pimicop16)="¿Le sentiría bien con el PROGRAMA como un tratamiento para los problemas de salud mental del cliente?"
+label(database$pimicop17)="¿Le gustaría aprender  EL PROGRAMA?"
+label(database$pimicop18)="¿Cree que las habilidades que aprendería al prestar este servicio serían útiles para ayudar a los clientes?"
+label(database$pimicop19)="¿Siente que los componentes (por ejemplo, las actividades que haría durante las consultas con los clientes) del PROGRAMA tendrían sentido?"
+label(database$pimicop20)="¿Cuán satisfecho estaría usted con el entrenamiento que recibió del PROGRAMA?"
+label(database$pimicop21)="¿Cuán satisfecho estaría usted con la supervisión que recibe cuando está prestando EL PROGRAMA?"
+label(database$pimicop22)="¿El material del PROGRAMA (es decir, manual, formas) está claro?"
+label(database$pimicop23)="¿Ser un prestador del PROGRAMA le ayudaría a sentirse exitoso en su trabajo?"
+label(database$pimicop24)="¿Ser un prestador del PROGRAMA le permitirá tener estabilidad laboral?"
+label(database$pimicop25)="¿Prestar el PROGRAMA sería consistente con sus metas profesionales?"
+label(database$pimicop26)="¿Ser un prestador del PROGRAMA crearía más oportunidades para su acenso profesional?"
+label(database$pimicop27)="¿Qué tan bien encaja EL PROGRAMA con los valores culturales de sus clientes?"
+label(database$pimicop28)="¿Qué tan bien encaja EL PROGRAMA con sus propios valores personales?"
+label(database$pimicop29)="¿Qué tan bien encaja EL PROGRAMA con sus propios valores culturales?"
+label(database$pimicop30)="¿Es el PROGRAMA compatible con la cultura masculina en su país?"
+label(database$pimicop31)="¿Es el PROGRAMA compatible con la cultura femenina en su país?"
+label(database$pimicop32)="¿Sería el PROGRAMA una buena manera de abordar los problemas de su cliente?"
+label(database$pimicop33)="¿Ayudaría el PROGRAMA a sus clientes a sentirse mejor?"
+label(database$pimicop34)="¿Sería efectivo EL PROGRAMA para los problemas de salud mental de sus clientes?"
+label(database$pimicop35)="¿Sería probable que el PROGRAMA fuera efectivo para las personas en otras partes de su país?"
+label(database$pimicop36)="¿Prestar el PROGRAMA sería algo que usted sentiría que debería estar haciendo como parte de su trabajo?"
+label(database$pimicop37)="¿Proporcionar supervisión para el PROGRAMA sería algo que usted sentiría que debe hacer como parte de su trabajo?"
+label(database$pimicop38)="¿Seguir el progreso del cliente a través de la documentación para el PROGRAMA sería algo que usted sentiría que debe hacer como parte de su trabajo?"
+label(database$pimicop39)="¿Prestar el PROGRAMA sería algo en que sus colegas le apoyarían hacer como parte de su trabajo?"
+label(database$pimicop40)="¿La prestación del PROGRAMA encajaría con su descripción de trabajo actual?"
+label(database$pimicop41)="¿Participar en la supervisión del PROGRAMA encajaría con su descripción de trabajo actual?"
+label(database$pimicop42)="¿Estaría usted suficientemente capacitado para prestar EL PROGRAMA a sus clientes?"
+label(database$pimicop43)="¿Tendría usted suficiente tiempo para todas las actividades que se dedican a prestar el PROGRAMA (por ejemplo: documentación, manejo de temas de seguridad, etc.)?"
+label(database$pimicop44)="¿Tendría usted suficiente tiempo para dedicarse a las actividades de supervisión relacionadas con EL PROGRAMA?"
+label(database$pimicop45)="¿Tendría usted tendría suficiente tiempo para prestar regularmente el PROGRAMA a quienes lo necesitan?"
+label(database$pimicop46)="¿Tendría suficiente tiempo para ir y venir a citas del PROGRAMA?"
+label(database$pimicop47)="¿Le pagarían lo suficiente por prestar EL PROGRAMA?"
+label(database$pimicop48)="¿Se le daría el dinero necesario para el transporte para prestar regularmente el PROGRAMA?"
+label(database$pimicop49)="¿Tendría usted el equipo adecuado (por ejemplo: lápices / bolígrafos / computadora / internet, juguetes, artículos de arte) para prestar regularmente EL PROGRAMA?"
+label(database$pimicop50)="¿Tendría usted los recursos (por ejemplo: teléfono, tiempo de conversación) para llegar a sus clientes y / o supervisor cuando sea necesario?"
+label(database$pimicop51)="¿Tendría usted acceso suficiente al espacio privado para reunirse con los clientes?"
+label(database$pimicop52)="¿Tendría el programa general un presupuesto suficiente para proporcionar el PROGRAMA?"
+label(database$pimicop53)="¿Habría suficientes prestadores capacitados en el PROGRAMA para atender a la población que necesita servicios?"
+label(database$pimicop54)="¿Podría usted comunicarse con su supervisor cuando sea necesario?"
+label(database$pimicop55)="¿Tendría usted acceso suficiente al apoyo clínico y a la educación continuada?"
+label(database$pimicop56)="¿Tendría usted apoyo para el autocuidado cuando le sea necesario?"
+label(database$pimicop57)="¿Sentiría usted que cuenta con el apoyo necesario para estar emocionalmente saludable para prestar EL PROGRAMA?"
+label(database$pimicop58)="En promedio, ¿cuántas horas por semana dedicaría a prestar el PROGRAMA a los clientes?"
+label(database$pimicop59)="En promedio, ¿cuántos días a la semana estaría disponible para prestar el PROGRAMA a los clientes?"
+label(database$pimicop60)="¿Cuántas horas a la semana gastaría en otras actividades además de ver a los clientes y la supervisión, relacionados con la prestación del PROGRAMA?"
+label(database$pimicop61)="¿Cuántas horas por semana pasaría en reuniones relacionadas con la supervisión?"
+label(database$pimicop62)="¿Las personas de la comunidad estarían al tanto de que los servicios del PROGRAMA estarían disponibles?"
+label(database$pimicop63)="¿Los clientes que buscarían ayuda podrían comenzar EL PROGRAMA con poco tiempo de espera?"
+label(database$pimicop64)="¿La mayoría de la gente en la comunidad buscaría los servicios del PROGRAMA si fueran necesarios?"
+label(database$pimicop65)="¿Las personas más pobres de la comunidad buscarían los servicios del PROGRAMA si fuera necesarios?"
+label(database$pimicop66)="(Si de ningún modo o un poco) ¿Cuáles son las razones por las que los pobres no buscarían servicios?"
+label(database$pimicop67)="¿Las mujeres buscarían los servicios del PROGRAMA si fueran necesarios?"
+label(database$pimicop68)="(Si de ningún modo o un poco) ¿Cuáles son las razones por las que las mujeres no buscarían servicios?"
+label(database$pimicop69)="¿Los hombres buscarían los servicios del PROGRAMA si fueran necesarios?"
+label(database$pimicop70)="(Si de ningún modo o un poco) ¿Cuáles son las razones por las que los hombres no buscarían servicios?"
+label(database$pimicop71)="¿Los padres u otros cuidadores buscarían los servicios del PROGRAMA para sus hijos si fueran necesarios?"
+label(database$pimicop72)="(Si de ningún modo o un poco) ¿Cuáles son las razones por las que los padres u otros cuidadores no buscarían servicios para sus hijos?"
+label(database$pimicop73)="¿Los niños sin padres u otros cuidadores buscarían los servicios del PROGRAMA si fueran necesarios?"
+label(database$pimicop74)="(Si de ningún modo o un poco) ¿Cuáles son las razones por las que los niños sin padres u otros cuidadores no buscarían servicios?"
+label(database$pimicop75)="¿Quién no buscaría los servicios del PROGRAMA dentro de su comunidad?"
+label(database$pimicop77)="¿Su moral en el trabajo sería alta?"
+label(database$pimicop78)="¿Sería su carga de trabajo manejable (lo que significa que usted no se sentiría estresado o con demasiado trabajo)?"
+label(database$pimicop79)="¿Siente que estaría bien informado sobre las cosas que debe saber dentro de su organización?"
+label(database$pimicop80)="¿Su organización le mantendría bien informado sobre lo que necesitaría saber para hacer su trabajo?"
+label(database$pimicop81)="Si usted tuviera  un problema en el trabajo, ¿sabría a quién acudir para obtener la solución?"
+label(database$pimicop82)="¿Si usted tuviera un problema, la persona a la cual usted acudiría en su organización estaría receptiva?"
+label(database$pimicop83)="¿La organización para la que trabaja promovería su crecimiento profesional?"
+label(database$pimicop84)="¿La organización para la que trabaja sería adaptable a sus necesidades?"
+label(database$pimicop85)="¿Se pagaría regularmente a tiempo?"
+label(database$pimicop86)="¿Estaría satisfecho con la compensación monetaria que recibe por su trabajo?"
+label(database$pimicop87)="¿Le importaría la dirección y el éxito de la organización más grande que está implementando EL PROGRAMA?"
+label(database$pimicop88)="¿Hay suficientes oportunidades de aprendizaje que se ofrecería a usted a través de su organización?"
+label(database$pimicop89)="¿En qué grado es la comunicación entre las personas de su organización positiva y útil?"
+label(database$pimicop90)="¿Sentiría usted que su lugar de trabajo tiene un ambiente de positivo para trabajar y aprender?"
+label(database$pimicop91)="¿Cree usted que habría un alto nivel de cohesión dentro de su organización (por ejemplo, el personal se lleva bien trabajando juntos como un equipo)?"
+label(database$pimicop92)="¿El personal de su organización tendría una alta  moral o motivación?"
+label(database$pimicop93)="¿Cree usted que el PROGRAMA encajaría con los objetivos de su organización?"
+label(database$pimicop94)="¿Cree usted que proporcionar el PROGRAMA sería útil para su organización?"
+label(database$pimicop95)="¿Los líderes de su organización tendrían estándares de calidad claros para la implementación del PROGRAMA?"
+label(database$pimicop96)="¿Los líderes de su organización tendrían un plan para facilitar la implementación del PROGRAMA?"
+label(database$pimicop97)="¿Los líderes habrían eliminado de su organización los obstáculos a la implementación del PROGRAMA?"
+label(database$pimicop98)="¿Los líderes de su organización sabrían de qué están hablando cuando se trata del PROGRAMA?"
+label(database$pimicop99)="¿Los líderes de su organización estarían informados sobre EL PROGRAMA?"
+label(database$pimicop100)="¿Los líderes de su organización estarían capaces de responder a las preguntas del personal sobre EL PROGRAMA?"
+label(database$pimicop101)="¿Los líderes de su organización apoyarían los esfuerzos de los proveedores para usar EL PROGRAMA?"
+label(database$pimicop102)="¿Los líderes de su organización apoyarían los esfuerzos de los proveedores para aprender más sobre EL PROGRAMA?"
+label(database$pimicop103)="¿Los líderes de su organización reconocerían y apreciarían los esfuerzos de los proveedores?"
+label(database$pimicop107)="¿Los líderes de su organización preservarían a través de los altibajos de la implementación del PROGRAMA?"
+label(database$pimicop108)="¿Los líderes de su organización continuarían trabajar a pesar de los desafíos de implementar EL PROGRAMA?"
+label(database$pimicop109)="¿Los líderes de su organización abordarían de manera efectiva las cuestiones cruciales relacionadas con la implementación del PROGRAMA?"
+label(database$pimicop110)="¿Los líderes de su organización son buenos líderes?"
+label(database$pimicop111)="¿Es fácil hablar con los líderes de su organización?"
+label(database$pimicop112)="¿Los líderes de su organización son confiables?"
+label(database$pimicop113)="¿Los líderes de su organización se comportan de manera que obtienen respeto de los miembros del personal?"
+label(database$pimicop114)="¿Los líderes de su organización tomarían las decisiones apropiadas para ayudar a asegurar el éxito del PROGRAMA?"
+label(database$pimicop115)="¿Los líderes de su organización estarían abiertos a escuchar ideas que difieren de las suyas?"
+label(database$pimicop116)="¿Los líderes de su organización ayudarían a los miembros del personal a ver cómo las metas del programa se alinean con sus metas personales?"
+label(database$pimicop117)="¿Los líderes de su organización hablarían acerca de las metas para el futuro del programa?"
+label(database$pimicop118)="¿Los líderes de su organización tendrían estrategias para ayudar a alcanzar los objetivos del programa?"
+label(database$imico_provider_pre_complete)="Complete?"
+label(database$ppsat1)="¿Las personas influyentes apoyarían fuertemente el programa?"
+label(database$ppsat2)="¿El programa tendría personas que lo apoyan tan fuertemente que adquieren recursos para ello?"
+label(database$ppsat3)="¿El programa tendría apoyo del liderazgo dentro de la organización más grande?"
+label(database$ppsat4)="¿El programa tendría un fuerte apoyo de la comunidad?"
+label(database$ppsat5)="¿El programa tendría un fuerte apoyo del gobierno?"
+label(database$ppsat6)="¿El programa sería reconocido dentro de su organización como algo que cuadra bien con los objetivos generales de la organización?"
+label(database$ppsat7)="¿Las organizaciones comunitarias estarían icomprometidas en el éxito del programa?"
+label(database$ppsat8)="¿Estaría el gobierno comprometido en el éxito del programa?"
+label(database$ppsat9)="¿Existen otras organizaciones (no comunitarias y no gubernamentales) que estarían comprometidas  en el éxito del programa?"
+label(database$ppsat10)="¿Su organización se comunicaría con los líderes de la comunidad sobre el programa?"
+label(database$ppsat11)="¿Los líderes comunitarios estarían involucrados con el programa?"
+label(database$ppsat12)="¿Los miembros de la comunidad afectados por problemas de salud mental apoyarían fuertemente el programa?"
+label(database$ppsat13)="¿La comunidad estaría involucrada en el desarrollo de las metas del programa?"
+label(database$ppsat14)="¿El programa estaría bien integrado dentro de su organización?"
+label(database$ppsat15)="Su organización apoyaría las necesidades del programa?"
+label(database$ppsat16)="¿Los líderes de su organización manejarían con efectividad el dinero necesario para el programa?"
+label(database$ppsat17)="¿Los líderes de su organización manejarían eficientemente el personal y otros recursos?"
+label(database$ppsat18)="¿La organización tendría personal adecuado para completar las actividades del programa?"
+label(database$ppsat19)="¿Se especificarían claramente las funciones y responsabilidades de los prestadores?"
+label(database$ppsat20)="¿El nivel de rotación del personal sería manejable?"
+label(database$ppsat21)="¿Su organización tiene un sistema para contratar rápidamente nuevo personal para el programa según sea necesario?"
+label(database$ppsat22)="¿Su organización tendría un sistema para la formación de personal nuevo para el programa según sea necesario?"
+label(database$ppsat23)="¿Su organización tendría estrategias para ayudar a retener al personal?"
+label(database$ppsat24)="¿Su organización tendría espacio adecuado para proveer este programa?"
+label(database$ppsat25)="¿Su organización tendría opciones de transporte disponibles según sea necesario para mantener el programa en funcionamiento?"
+label(database$ppsat26)="¿Su organización tendría suministros adecuados para proveer este programa?"
+label(database$ppsat27)="¿Su organización tendría la capacidad de supervisión adecuada para capacitar y supervisar a los proveedores?"
+label(database$ppsat28)="¿Se evaluaría activamente el programa?"
+label(database$ppsat29)="¿Existiría un sistema para monitorizar los resultados del programa?"
+label(database$ppsat30)="¿La gente dentro de su organización monitorizaría los resultados del cliente (p. ej., síntomas)?"
+label(database$ppsat31)="¿Las personas dentro de su organización monitorizarían el número de personas atendidas por el programa?"
+label(database$ppsat32)="¿La gente dentro de su organización monitorizaría las actividades clínicas (p. ej., qué se hace en las citas con los clientes, supervisión)?"
+label(database$ppsat33)="¿La gente dentro de su organización monitorizaría la calidad de los servicios que los clientes reciben?"
+label(database$ppsat34)="¿Utilizaría su organización los resultados del programa para guiar la planificación e implementación del programa en el futuro?"
+label(database$ppsat35)="¿Se compartiría los resultados de la evaluación del programa con los donantes y otros actores claves?"
+label(database$ppsat36)="¿Su organización compartiría información sobre los efectos del programa con el público?"
+label(database$ppsat37)="¿Los hallazgos o problemas negativos con el programa serían investigados y tratados de manera efectiva?"
+label(database$ppsat38)="¿Su organización monitorizaría las necesidades de la comunidad?"
+label(database$ppsat39)="¿Su organización tendría un proceso para adaptar el programa a los cambios en las necesidades de la comunidad?"
+label(database$ppsat40)="¿Su organización tendría un proceso para eliminar partes del programa que son ineficaces y no deberían continuar?"
+label(database$ppsat41)="¿Su organización tendría un proceso para adaptar la capacitación para el programa según sea necesario?"
+label(database$ppsat42)="¿Su organización tendría un proceso para adaptar la supervisión para el programa según sea necesario?"
+label(database$ppsat43)="¿Haría adaptaciones clínicas según sea necesario para mantener la efectividad del tratamiento del programa de salud mental?"
+label(database$ppsat44)="¿Su organización tendría un proceso para adaptar el programa a los cambios en las necesidades de los proveedores?"
+label(database$ppsat45)="¿Su organización comunicaría la necesidad del programa al público?"
+label(database$ppsat46)="¿Se divulgaría el programa de una manera que crea interés?"
+label(database$ppsat47)="¿Su organización aumentaría la conciencia de la comunidad sobre los temas que el programa aborda?"
+label(database$ppsat48)="¿Su organización presentaría una visión clara del programa a la comunidad?"
+label(database$ppsat49)="¿Su organización demostraría el valor del programa a la comunidad?"
+label(database$ppsat50)="¿Comunicaría usted la necesidad del programa a otro personal dentro de su organización?"
+label(database$ppsat51)="¿Comunicaría usted las ventajas del programa dentro de su organización?"
+label(database$ppsat52)="¿Haría usted esfuerzos para aumentar la conciencia organizacional del programa?"
+label(database$ppsat53)="¿Proporcionaría actualizaciones regulares sobre el programa a otros en la organización?"
+label(database$ppsat54)="¿Tendrían sus líderes de la organización un proceso para permitir que los proveedores se involucren en la planificación futura del programa?"
+label(database$ppsat55)="¿Es probable que sus líderes organizacionales comuniquen claramente que valoran este programa?"
+label(database$ppsat56)="¿Los líderes de la organización articularían eficazmente la visión del programa al personal?"
+label(database$ppsat57)="¿Los líderes de la organización proveerían comentarios regulares al personal?"
+label(database$psat_provider_pre_complete)="Complete?"
+label(database$city_of_b_staff)="1. Ciudad de nacimiento"
+label(database$sex_staff)="2. Sexo (al nacer)"
+label(database$race_staff)="3. De acuerdo con su cultura, lugar de residencia o características físicas, usted se reconoce como:"
+label(database$ethicity_staff)="4. Identidad étnica"
+label(database$education_staff)="5. ¿Cuál es su nivel más alto de educación?"
+label(database$datos_sociodemogrficos_staff_complete)="Complete?"
+
+```
+
+## Datos sociodemográficos
+
+A continuación un resumen de los datos sociodemográficos de los Providers que realizaron el IMICO y el PSAT en Javesalud
+
+```{r , echo=FALSE}
+
+dt = database[,174:178]
+
+
+xxx = apply(dt, 2, function(x) {
+        table(x)
+        prop.table(table(x))
+      })
+
+
+dl <- data.frame(ID = rep(names(xxx), sapply(xxx, length)),
+                 Proportion = unlist(xxx))
+
+dl
+
+
+
+```
+
+## IMICO : ADOPTION
+
+Una descripcion general de las :
+
+```{r , echo=FALSE}
+#lapply(database[,4:6], ftable)
+#lapply(database[,4:118], describe)
+
+adopt=database[,4:13]
+
+xxx = apply(adopt, 2, function(x) {
+        table(x)
+        prop.table(table(x))
+      })
+
+
+dl <- data.frame(ID = rep(names(adopt), sapply(adopt, length)),
+                 Proportion = unlist(xxx))
+
+dl
+
+
+```
+
+## Resultados del PSAT
+
+Una descripcion general de las :
+
+```{r , echo=FALSE}
+#lapply(database[,4:6], ftable)
+lapply(database[,120:172], describe)
+```
+
+
+```{r , echo=FALSE}
+oursummary1 = 
+  list("Gender" = 
+         list("Female" = ~ qwraps2::n_perc0(database$sex_staff == 2),
+              "Male" = ~ qwraps2::n_perc0(database$sex_staff == 1))
+       
+         )
+       
+
+summary_table(as.data.frame(database), oursummary1)
+```
