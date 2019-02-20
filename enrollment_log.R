@@ -23,6 +23,11 @@ database=as.data.frame(database) #Confirm if this step is necessary
 # Set columns names
 setnames(database, c("id", "cedula",    "date",    "screen_dep",    "phq9",    "audit",    "age",    "sex",    "oh",    "depression"))
 
+# Keep only one kiosk entry per cedula, keep only the last kiosk entry
+database=database %>%
+  group_by(cedula) %>%
+  slice(which.max(as.Date(database$date, "%Y-%m-%d")))
+
 # Set date
 database$date=as.Date.factor(database$date,"%Y-%m-%d")
 database=subset(database, date < as.Date("2018-09-01")) ##año-mes-dia
