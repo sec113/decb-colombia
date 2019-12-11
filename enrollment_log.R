@@ -23,10 +23,21 @@ database=as.data.frame(database) #Confirm if this step is necessary
 # Set columns names
 setnames(database, c("id", "cedula",    "date",    "screen_dep",    "phq9",    "audit",    "age",    "sex",    "oh",    "depression"))
 
-# Keep only one kiosk entry per cedula, keep only the last kiosk entry
-database=database %>%
-  group_by(cedula) %>%
-  slice(which.max(as.Date(database$date, "%Y-%m-%d")))
+# Load data from September alternative data table
+dbseptember=read.csv("D:/Informacion/Documents/Dartmouth/Data/Resultados_Diada_12-09-2019.csv", encoding = "UTF-8")
+setnames(dbseptember, c("id", "site", "cedula",    "date",    "screen_dep",    "phq9",    "audit",    "age",    "sex",    "oh",    "depression"))
+
+# Merge both data tables
+database = rbind(database, dbseptember)
+
+# Clean database and remove input errors
+database =database[!(database$id=="2147483647" | database$id=="123456" | database$sex=="" | database$id<=0),]
+
+# Fix date format
+database$date=gsub("\\d\\d\\:\\d\\d:\\d\\d", "",x = database$date)
+
+# Create a copy just in case
+database2=database
 
 # Set date
 database$date=as.Date.factor(database$date,"%Y-%m-%d")
@@ -37,7 +48,22 @@ sexdf=database[order(database$cedula),]
 sexdf=sexdf[!duplicated(sexdf$cedula),]
 table(sexdf$sex)
 
+# Here I have many alternatives to get the Enrolment Log I want
+# Enrolment Log by last positive: Keep only one kiosk entry per cedula, keep only the last positive screening in the kiosk
+database= setDT(database)[, .SD[which.max(screen_dep)], cedula]
 
+# Enrolment Log by last kiosk entry: 
+# Alternative 1: Keep only one kiosk entry per cedula, keep only the last kiosk entry
+database=database %>%
+  group_by(cedula) %>%
+  slice(which.max(as.Date(database$date, "%Y-%m-%d")))
+
+# Alternative 2: Keep only one kiosk entry per cedula, keep only the last kiosk entry
+database =database[!(database$date==""),]
+database= setDT(database)[, .SD[which.max(date)], cedula]
+
+
+# Create the table
 enrolment=data.frame(total=nrow(count(database,"cedula")),
                      whooley=as.numeric(table(database$screen_dep)[2]),
                      auditc=as.numeric(table(ifelse(database$audit > 3, "yes", "no"))[2]),
@@ -52,7 +78,13 @@ enrolment=data.frame(total=nrow(count(database,"cedula")),
 
 write.csv(x = enrolment,file = "C:/Users/SergioMC/Documents/Dartmouth/Research/enrollment.csv")
 
+# Get the total number of new positive screenings per site in the last week
+datab=subset(database, (date  > as.Date("2019-11-27") & date <= as.Date("2019-12-04")))
+table(datab$site)
 
+
+
+################################################################################################################################
 # database$dualdiagnosis=ifelse(database$depression != "" & database$oh != "","yes","no")
 # database$poh = ifelse(database$audit > 6, "yes", "no")
 # as.data.frame(table(database$poh))
